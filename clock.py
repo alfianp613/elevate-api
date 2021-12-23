@@ -6,7 +6,7 @@ sched = BlockingScheduler()
 koin = ['bitcoin','ethereum','binance coin','tether','solana',
         'cardano','xrp','usd coin','polkadot','dogecoin']
 
-@sched.scheduled_job('cron', day_of_week='mon-sun', hour=20)
+@sched.scheduled_job('cron', day_of_week='mon-sun', hour=10)
 def scheduled_job():
     for i in koin:
         sentimen(i)
