@@ -49,10 +49,12 @@ def req_forecast():
 def get_image():
     if not request.json or not 'status' in request.json:
         abort(400)
-    r = request.get_json()
-    filename = r['namafile']
-    tipefile = r['tipefile']
-    return send_file(filename, mimetype=f'image/{tipefile}')
+    data = request.get_json()
+    if data['status'] != 'minta datanya dong':
+            abort(400)
+    else:
+        koin = data['koin']
+        return send_file(f'wordcloud/wordcloud {koin}.png', mimetype=f'image/png')
 
         
 if __name__ == '__main__':

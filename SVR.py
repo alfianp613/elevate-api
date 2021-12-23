@@ -54,17 +54,18 @@ def forecast_SVR(koin):
     regressor.fit(x, y.ravel())
 
     pred_ss = regressor.predict(xpred).reshape(-1, 1)
-    pred_svr = ss_y.inverse_transform(pred_ss).tolist()
-
+    pred_svr = ss_y.inverse_transform(pred_ss)
+    a = [float(i) for i in pred_svr]
+    
     date_3 = pd.date_range(today, periods=3, freq='D')
     date_3_rev = date_3.strftime('%Y-%m-%d').tolist()
     
     now = datetime.datetime.now()
     tanggal = f'{now.day}/{now.month}/{now.year}'
-    time = f'{now.hour}:{now.minute}'
+    time = f'{now.strftime("%H")}:{now.strftime("%M")}'
     
     svr_output = {'tanggal':date_3_rev,
-                  'close':pred_svr,
+                  'close':a,
                   'date':tanggal,
                   'jam':time}
     import json

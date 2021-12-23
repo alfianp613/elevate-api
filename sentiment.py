@@ -92,7 +92,7 @@ def sentimen(katakunci):
         net +=1
     now = datetime.datetime.now()
     tanggal = f'{now.day}/{now.month}/{now.year}'
-    time = f'{now.hour}:{now.minute}'
+    time = f'{now.hour}:{now.strftime("%M")}'
     output = {'sentiment':['Positif','Negatif','Netral'],
         'total':[pos, neg, net],'tanggal':tanggal,'jam':time}
     import json
