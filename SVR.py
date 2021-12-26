@@ -74,7 +74,7 @@ def forecast_SVR(koin):
     
     return print(f'{koin} Selesai')
   
-# koin = ['bitcoin','ethereum','binance coin','tether','solana',
-#         'cardano','xrp','usd coin','polkadot','dogecoin']
-# for i in koin:
-#       forecast_SVR(i)
+koin = ['bitcoin','ethereum','binance coin','tether','solana',
+        'cardano','xrp','usd coin','polkadot','dogecoin']
+for i in koin:
+      forecast_SVR(i)
