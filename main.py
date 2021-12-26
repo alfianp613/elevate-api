@@ -57,14 +57,6 @@ def get_image():
     else:
         koin = data['koin']
         return send_file(f'wordcloud/wordcloud {koin}.png', mimetype=f'image/png')
-
-@app.route('/api/update/')
-def scheduled_job():
-    koin = ['bitcoin','ethereum','binance coin','tether','solana',
-        'cardano','xrp','usd coin','polkadot','dogecoin']
-    for i in koin:
-        sentimen(i)
-        forecast_SVR(i)
         
 if __name__ == '__main__':
     app.run(debug=True)
