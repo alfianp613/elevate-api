@@ -9,11 +9,8 @@ from nltk.corpus import stopwords
 from wordcloud import WordCloud, STOPWORDS
 import matplotlib.pyplot as plt
 from datetime import date
-# nltk.download('stopwords')
-# nltk.download('punkt')
-# nltk.download('wordnet')
-# nltk.download('omw-1.4')
 import datetime
+import pyrebase
 
 def sentimen(katakunci):
     consumerKey = "z3Xe9UNE6tT3hd4J3SbtlZJqJ"
@@ -95,20 +92,39 @@ def sentimen(katakunci):
     time = f'{now.hour}:{now.strftime("%M")}'
     output = {'sentiment':['Positif','Negatif','Netral'],
         'total':[pos, neg, net],'tanggal':tanggal,'jam':time}
-    import json
-    with open(f'data sentiment/sentiment {katakunci}.json', 'w') as f:
-      json.dump(output, f)
     
     mix = " ".join(i for i in twt)
     stopwords = set(STOPWORDS)
     wordcloud2 = WordCloud(max_font_size=80, stopwords=stopwords).generate(mix)
     wordcloud2.to_file(f'wordcloud/wordcloud {katakunci}.png')
-    return print(f'{katakunci} Selesai')
-  
-# koin = ['bitcoin','ethereum','binance coin','tether','solana',
-#         'cardano','xrp','usd coin','polkadot','dogecoin']
-# for i in koin:
-#       sentimen(i)
+    
+    # save in firebase
+    config = {'apiKey': "AIzaSyBF9zZqQBt2h0RJZN3Xubugse5Ba3qJLdw",
+          'authDomain': "elevate-66775.firebaseapp.com",
+          'projectId': "elevate-66775",
+          'databaseURL': "https://elevate-66775-default-rtdb.asia-southeast1.firebasedatabase.app/",
+          'storageBucket': "elevate-66775.appspot.com",
+          'messagingSenderId': "1008765930388",
+          'appId': "1:1008765930388:web:5ad1f3c8464d8f8d859d81",
+          'measurementId': "G-0Q4Y5MFCVD"}
+    firebase = pyrebase.initialize_app(config)
+    # Get a reference to the auth service
+    auth = firebase.auth()
+
+    email = 'alfianp613@gmail.com'
+    password = 'DummyDummy631'
+    # Log the user in
+    user = auth.sign_in_with_email_and_password(email, password)
+    database = firebase.database()
+    a = database.child("Sentiment").child(katakunci).set(output,user['idToken'])
+    
+    storage = firebase.storage()
+    path_on_cloud = f"wordcloud/wordcloud {katakunci}.png"
+    path_local = f'wordcloud/wordcloud {katakunci}.png'
+    
+    storage.child(path_on_cloud).put(path_local, user['idToken'])
+    
+    return print(f'sentiment {katakunci} Selesai')
 
 
 

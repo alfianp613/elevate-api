@@ -6,6 +6,7 @@ import pandas as pd
 from sklearn.svm import SVR
 from sklearn.preprocessing import StandardScaler
 import datetime
+import pyrebase
 
 def forecast_SVR(koin):
     today = date.today()
@@ -68,13 +69,23 @@ def forecast_SVR(koin):
                   'close':a,
                   'date':tanggal,
                   'jam':time}
-    import json
-    with open(f'forecasting/forecasting {koin}.json', 'w') as f:
-      json.dump(svr_output, f)
     
-    return print(f'{koin} Selesai')
-  
-# koin = ['bitcoin','ethereum','binance coin','tether','solana',
-#         'cardano','xrp','usd coin','polkadot','dogecoin']
-# for i in koin:
-#       forecast_SVR(i)
+    config = {'apiKey': "AIzaSyBF9zZqQBt2h0RJZN3Xubugse5Ba3qJLdw",
+          'authDomain': "elevate-66775.firebaseapp.com",
+          'projectId': "elevate-66775",
+          'databaseURL': "https://elevate-66775-default-rtdb.asia-southeast1.firebasedatabase.app/",
+          'storageBucket': "elevate-66775.appspot.com",
+          'messagingSenderId': "1008765930388",
+          'appId': "1:1008765930388:web:5ad1f3c8464d8f8d859d81",
+          'measurementId': "G-0Q4Y5MFCVD"}
+    firebase = pyrebase.initialize_app(config)
+    # Get a reference to the auth service
+    auth = firebase.auth()
+
+    email = 'alfianp613@gmail.com'
+    password = 'DummyDummy631'
+    # Log the user in
+    user = auth.sign_in_with_email_and_password(email, password)
+    database = firebase.database()
+    a = database.child("Forecast").child(koin).set(svr_output,user['idToken'])
+    return print(f'forecast {koin} Selesai')
