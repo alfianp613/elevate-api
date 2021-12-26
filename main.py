@@ -81,12 +81,23 @@ def update_forecast():
         forecast_SVR(i)
     return '''<h1>Data forecast berhasil di update</h1>'''
 
-@app.route('/api/update/sentiment')
-def update_sentiment():
-    koin = ['bitcoin','ethereum','binance coin','tether','solana',
-        'cardano','xrp','usd coin','polkadot','dogecoin']
+@app.route('/api/update/sentiment1')
+def update_sentiment1():
+    koin = ['bitcoin','ethereum','binance coin']
     for i in koin:
         sentimen(i)
-    return '''<h1>Data forecast berhasil di update</h1>'''
+    return '''<h1>Data sentiment1 berhasil di update</h1>'''
+@app.route('/api/update/sentiment2')
+def update_sentiment2():
+    koin = ['tether','solana','cardano']
+    for i in koin:
+        sentimen(i)
+    return '''<h1>Data sentiment2 berhasil di update</h1>'''
+@app.route('/api/update/sentiment3')
+def update_sentiment3():
+    koin = ['xrp','usd coin','polkadot','dogecoin']
+    for i in koin:
+        sentimen(i)
+    return '''<h1>Data sentiment3 berhasil di update</h1>'''
 if __name__ == '__main__':
     app.run(debug=True)
