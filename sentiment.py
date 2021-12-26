@@ -9,10 +9,10 @@ from nltk.corpus import stopwords
 from wordcloud import WordCloud, STOPWORDS
 import matplotlib.pyplot as plt
 from datetime import date
-nltk.download('stopwords')
-nltk.download('punkt')
-nltk.download('wordnet')
-nltk.download('omw-1.4')
+# nltk.download('stopwords')
+# nltk.download('punkt')
+# nltk.download('wordnet')
+# nltk.download('omw-1.4')
 import datetime
 
 def sentimen(katakunci):
