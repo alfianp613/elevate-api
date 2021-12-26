@@ -105,10 +105,10 @@ def sentimen(katakunci):
     wordcloud2.to_file(f'wordcloud/wordcloud {katakunci}.png')
     return print(f'{katakunci} Selesai')
   
-koin = ['bitcoin','ethereum','binance coin','tether','solana',
-        'cardano','xrp','usd coin','polkadot','dogecoin']
-for i in koin:
-      sentimen(i)
+# koin = ['bitcoin','ethereum','binance coin','tether','solana',
+#         'cardano','xrp','usd coin','polkadot','dogecoin']
+# for i in koin:
+#       sentimen(i)
 
 
 
