@@ -95,9 +95,15 @@ def update_sentiment2():
     return '''<h1>Data sentiment2 berhasil di update</h1>'''
 @app.route('/api/update/sentiment3')
 def update_sentiment3():
-    koin = ['xrp','usd coin','polkadot','dogecoin']
+    koin = ['xrp','usd coin']
     for i in koin:
         sentimen(i)
     return '''<h1>Data sentiment3 berhasil di update</h1>'''
+@app.route('/api/update/sentiment4')
+def update_sentiment4():
+    koin = ['polkadot','dogecoin']
+    for i in koin:
+        sentimen(i)
+    return '''<h1>Data sentiment4 berhasil di update</h1>'''
 if __name__ == '__main__':
     app.run(debug=True)
