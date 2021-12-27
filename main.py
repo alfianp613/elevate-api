@@ -5,6 +5,7 @@ import json
 import pyrebase
 from SVR import *
 from sentiment import *
+from datetime import datetime
 
 config = {'apiKey': "AIzaSyBF9zZqQBt2h0RJZN3Xubugse5Ba3qJLdw",
         'authDomain': "elevate-66775.firebaseapp.com",
@@ -40,11 +41,18 @@ def req_data():
         if data['status'] != 'minta datanya dong':
             abort(400)
         else:
-            coin = data['koin']
-            database = firebase.database()
-            f = database.child("Sentiment").child(coin).get(user['idToken'])
-            sentimen = dict(f.val())
-            return jsonify(sentimen),201
+            while True:
+                coin = data['koin']
+                database = firebase.database()
+                f = database.child("Sentiment").child(coin).get(user['idToken'])
+                sentiment = dict(f.val())
+                datetime_object = datetime.strptime(sentiment['tanggal'], '%d/%m/%Y').date()
+                if datetime_object < date.today():
+                    sentimen(coin)
+                    continue
+                else:
+                    break
+            return jsonify(sentiment),201
 
 @app.route('/api/forecast', methods=['POST'])
 def req_forecast():
@@ -55,10 +63,17 @@ def req_forecast():
         if data['status'] != 'minta datanya dong':
             abort(400)
         else:
-            coin = data['koin']
-            database = firebase.database()
-            f = database.child("Forecast").child(coin).get(user['idToken'])
-            forecast = dict(f.val())
+            while True:
+                coin = data['koin']
+                database = firebase.database()
+                f = database.child("Forecast").child(coin).get(user['idToken'])
+                forecast = dict(f.val())
+                datetime_object = datetime.strptime(forecast['date'], '%d/%m/%Y').date()
+                if datetime_object < date.today():
+                    forecast_SVR(coin)
+                    continue
+                else:
+                    break
             return jsonify(forecast),201
 
 @app.route('/api/wordcloud', methods=['POST'])
@@ -69,6 +84,17 @@ def get_image():
     if data['status'] != 'minta datanya dong':
             abort(400)
     else:
+        while True:
+            coin = data['koin']
+            database = firebase.database()
+            f = database.child("Sentiment").child(coin).get(user['idToken'])
+            sentiment = dict(f.val())
+            datetime_object = datetime.strptime(sentiment['tanggal'], '%d/%m/%Y').date()
+            if datetime_object < date.today():
+                sentimen(coin)
+                continue
+            else:
+                break
         koin = data['koin']
         storage = firebase.storage()
         storage.child(f'wordcloud/wordcloud {koin}.png').download(f"wordcloud/wordcloud {koin}.png")
