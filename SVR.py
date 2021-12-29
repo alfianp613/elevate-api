@@ -51,7 +51,7 @@ def forecast_SVR(koin):
     x = d_train_pred[:-2]
     y = ss_y.fit_transform(n)
 
-    regressor = SVR(kernel='rbf')
+    regressor = SVR(kernel='rbf', C=20.211818181818185, epsilon=0.3, gamma=1)
     regressor.fit(x, y.ravel())
 
     pred_ss = regressor.predict(xpred).reshape(-1, 1)
