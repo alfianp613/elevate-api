@@ -5,8 +5,8 @@ import json
 import pyrebase
 from SVR import *
 from sentiment import *
-from datetime import datetime
-
+from datetime import datetime, timedelta
+import investpy
 
 
 app = Flask(__name__)
@@ -130,6 +130,24 @@ def get_image():
         storage = firebase.storage()
         storage.child(f'wordcloud/wordcloud {koin}.png').download(f"wordcloud/wordcloud {koin}.png")
         return send_file(f'wordcloud/wordcloud {koin}.png', mimetype=f'image/png')
+
+@app.route('/api/historicaldata', methods=['POST'])
+def historical():
+    if not request.json or not 'koin' in request.json:
+        abort(400)
+    else:
+        data = request.get_json()
+        koin = data['koin']
+        sekarang = datetime.now().strftime("%d/%m/%Y")
+        kemarin = (datetime.now() - timedelta(days=1)).strftime("%d/%m/%Y")
+        data = investpy.get_crypto_historical_data(crypto=koin,
+                                            from_date=kemarin,
+                                            to_date=sekarang)
+        
+        x = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        y = data['Close'][-1]
+        results = {'date': x, 'value': y}
+        return jsonify(results), 201
 
 if __name__ == '__main__':
     app.run(debug=True)
