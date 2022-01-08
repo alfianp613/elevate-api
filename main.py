@@ -1,4 +1,3 @@
-from re import I
 from flask import Flask,request, jsonify, abort, send_file
 from flask_cors import CORS
 import json
