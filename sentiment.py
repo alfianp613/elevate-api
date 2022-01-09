@@ -95,7 +95,7 @@ def sentimen(katakunci):
     
     mix = " ".join(i for i in twt)
     stopwords = set(STOPWORDS)
-    wordcloud2 = WordCloud(max_font_size=80, stopwords=stopwords).generate(mix)
+    wordcloud2 = WordCloud(max_font_size=80, stopwords=stopwords,background_color='white').generate(mix)
     wordcloud2.to_file(f'wordcloud/wordcloud {katakunci}.png')
     
     # save in firebase
@@ -125,7 +125,6 @@ def sentimen(katakunci):
     storage.child(path_on_cloud).put(path_local, user['idToken'])
     
     return print(f'sentiment {katakunci} Selesai')
-
 
 
 
