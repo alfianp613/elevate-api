@@ -95,7 +95,8 @@ def sentimen(katakunci):
     
     mix = " ".join(i for i in twt)
     stopwords = set(STOPWORDS)
-    wordcloud2 = WordCloud(max_font_size=80, stopwords=stopwords,background_color='white').generate(mix)
+    font_path = 'MADE TOMMY Medium_PERSONAL USE.otf'
+    wordcloud2 = WordCloud(max_font_size=80, stopwords=stopwords, background_color='white', max_words=2000, font_path=font_path).generate(mix)
     wordcloud2.to_file(f'wordcloud/wordcloud {katakunci}.png')
     
     # save in firebase
@@ -127,4 +128,4 @@ def sentimen(katakunci):
     return print(f'sentiment {katakunci} Selesai')
 
 
-
+sentimen('bitcoin')
