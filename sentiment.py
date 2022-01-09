@@ -126,6 +126,3 @@ def sentimen(katakunci):
     storage.child(path_on_cloud).put(path_local, user['idToken'])
     
     return print(f'sentiment {katakunci} Selesai')
-
-
-sentimen('bitcoin')
