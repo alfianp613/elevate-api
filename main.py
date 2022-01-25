@@ -26,19 +26,12 @@ def req_data():
         if data['status'] != 'minta datanya dong':
             abort(400)
         else:
-            config = {'apiKey': "AIzaSyBF9zZqQBt2h0RJZN3Xubugse5Ba3qJLdw",
-            'authDomain': "elevate-66775.firebaseapp.com",
-            'projectId': "elevate-66775",
-            'databaseURL': "https://elevate-66775-default-rtdb.asia-southeast1.firebasedatabase.app/",
-            'storageBucket': "elevate-66775.appspot.com",
-            'messagingSenderId': "1008765930388",
-            'appId': "1:1008765930388:web:5ad1f3c8464d8f8d859d81",
-            'measurementId': "G-0Q4Y5MFCVD"}
+            config = "Firebase Config"
             firebase = pyrebase.initialize_app(config)
             # Get a reference to the auth service
             auth = firebase.auth()
-            email = 'alfianp613@gmail.com'
-            password = 'DummyDummy631'
+            email = 'email'
+	    password = 'password'
             # Log the user in
             user = auth.sign_in_with_email_and_password(email, password)
             while True:
@@ -63,19 +56,12 @@ def req_forecast():
         if data['status'] != 'minta datanya dong':
             abort(400)
         else:
-            config = {'apiKey': "AIzaSyBF9zZqQBt2h0RJZN3Xubugse5Ba3qJLdw",
-            'authDomain': "elevate-66775.firebaseapp.com",
-            'projectId': "elevate-66775",
-            'databaseURL': "https://elevate-66775-default-rtdb.asia-southeast1.firebasedatabase.app/",
-            'storageBucket': "elevate-66775.appspot.com",
-            'messagingSenderId': "1008765930388",
-            'appId': "1:1008765930388:web:5ad1f3c8464d8f8d859d81",
-            'measurementId': "G-0Q4Y5MFCVD"}
+            config = "Firebase Config"
             firebase = pyrebase.initialize_app(config)
             # Get a reference to the auth service
             auth = firebase.auth()
-            email = 'alfianp613@gmail.com'
-            password = 'DummyDummy631'
+            email = 'email'
+	    password = 'password'
             # Log the user in
             user = auth.sign_in_with_email_and_password(email, password)
             while True:
@@ -99,19 +85,12 @@ def get_image():
     if data['status'] != 'minta datanya dong':
             abort(400)
     else:
-        config = {'apiKey': "AIzaSyBF9zZqQBt2h0RJZN3Xubugse5Ba3qJLdw",
-            'authDomain': "elevate-66775.firebaseapp.com",
-            'projectId': "elevate-66775",
-            'databaseURL': "https://elevate-66775-default-rtdb.asia-southeast1.firebasedatabase.app/",
-            'storageBucket': "elevate-66775.appspot.com",
-            'messagingSenderId': "1008765930388",
-            'appId': "1:1008765930388:web:5ad1f3c8464d8f8d859d81",
-            'measurementId': "G-0Q4Y5MFCVD"}
+        config = "Firebase Config"
         firebase = pyrebase.initialize_app(config)
         # Get a reference to the auth service
         auth = firebase.auth()
-        email = 'alfianp613@gmail.com'
-        password = 'DummyDummy631'
+        email = 'email'
+	password = 'password'
         # Log the user in
         user = auth.sign_in_with_email_and_password(email, password)
         while True:
